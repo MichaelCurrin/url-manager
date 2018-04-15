@@ -1,0 +1,20 @@
+# Byte-compiled / optimized files.
+__pycache__/
+*.py[cod]
+
+# Virtual environment as a directory or symlink.
+venv/
+venv
+
+# Spyder project file.
+.spyproject
+
+# Database. Journal is a temporary file which is created when working with the db.
+url_manager/var/lib/db/*.sqlite
+url_manager/var/lib/db/*-journal
+
+# Local configuration files.
+url_manager/etc/*.local.*
+
+# Log files.
+url_manager/var/log/*/*.log
