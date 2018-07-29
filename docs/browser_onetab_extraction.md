@@ -15,7 +15,7 @@ This section is applicable for both Chrome and Chromium web browsers. The two ma
     - Or
         1. Open the _Application_ tab.
         2. Under _Storage_ then _Local Storage_, click on _chrome-extension://chphlpgkkbolifaimnlloiipkdnihall_.
-        3. Where the Key is _state_, double-click the value in _Value_ and copy the content to the clipboard.
+        3. Where the Key is _state_, double-click the the corresponding value on the right then copy the content to the clipboard.
 6. Create a next text file somewhere and paste the copied single-line string into a tempory file. e.g. `~/temp.json`
 7. Prettify the contents of the JSON file and save it to the project.
     ```bash
