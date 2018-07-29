@@ -21,10 +21,34 @@ This section is applicable for both Chrome and Chromium web browsers. The two ma
         1. Open the _Application_ tab.
         2. Under _Storage_ then _Local Storage_, click on _chrome-extension://chphlpgkkbolifaimnlloiipkdnihall_.
         3. Where the Key is _state_, double-click the the corresponding value on the right then copy the content to the clipboard.
-6. Create a next text file somewhere and paste the copied single-line string into a tempory file. e.g. `~/temp.json`
+6. Create a next text file somewhere and paste the copied single-line string into a tempory file. e.g. `~/temp.json`. The file will start like this:
+    ```
+    {"tabGroups":[{"id":"...","tabsMeta":[{"id":"...","url": ...
+    ```
 7. The following command will prettify the contents of the JSON file and save it to the project.
     ```bash
     $ # In this example, I am at a machine at the company 'mycompany' and the profile has data for personal use.
     $ cat ~/temp.json | python -m json.tool > path/to/repo/url_manager/var/lib/raw/onetab_chrome_mycompany_personal.json
+    $ # If you open the new file it should looke something like this:
+    {
+        "tabGroups": [
+            {
+                "createDate": 1526645339880,
+                "id": "...",
+                "label": "...",
+                "locked": false,
+                "starred": false,
+                "tabsMeta": [
+                    {
+                        "id": "...",
+                        "title": "...",
+                        "url": "https://..."
+                    },
+                    ...
+                ]
+                ...
+            }
+        ]
+    }
     ```
 8. Go back to step 2 and repeat for your other Chrome profiles, as desired.
