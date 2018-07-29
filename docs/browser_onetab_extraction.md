@@ -21,3 +21,4 @@ This section is applicable for both Chrome and Chromium web browsers. The two ma
     ```bash
     $ cat ~/temp.json | python -m json.tool > path/to/repo/url_manager/var/lib/raw/onetab_chrome_myco_personal.json
     ```
+8. Go back to step 2 and repeat for your other Chrome profiles, as desired.
