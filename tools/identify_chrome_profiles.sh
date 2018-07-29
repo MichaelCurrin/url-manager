@@ -19,8 +19,8 @@ do
 
   if [ -d $BROWSER_CONF_PATH ]
     then
-      for CHROME_USER in 'Default' 'Profile 1' 'Profile 2' 'Profile 3' 'Profile 4' \
-        'Profile 5' 'Profile 6' 'Profile 7' 'Profile 8' 'Profile 9'
+      for CHROME_USER in 'Default' 'Profile 1' 'Profile 2' 'Profile 3' \
+        'Profile 4' 'Profile 5' 'Profile 6' 'Profile 7' 'Profile 8' 'Profile 9'
       do
         if [ -d "$BROWSER_CONF_PATH/$CHROME_USER" ]
           then
@@ -30,11 +30,10 @@ do
             echo "  $CHROME_USER: $DISPLAY_NAME"
         fi
 
-      if [ "$FOUND" = false ]
-        then
-          echo '0 profiles found'
-      fi
-
+        if [ "$FOUND" = false ]
+          then
+            echo '0 profiles found'
+        fi
       done
     else
       echo "Could not find config files - perhaps the browser is not installed"
