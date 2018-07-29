@@ -1,5 +1,9 @@
 # Browser OneTab Extraction
 
+How to get OneTab data from your browsers so that you can easily import into the URL Manager application.
+
+Note that OneTab does allow you to export URLs in its own format, however result is not in JSON structure and also omits some metadata.
+
 ## Chrome
 
 This section is applicable for both Chrome and Chromium web browsers. The two may both exist on the same system and both may be imported in the URL Manager application. 
@@ -11,14 +15,16 @@ This section is applicable for both Chrome and Chromium web browsers. The two ma
 5. Get the Extension's data.
     - Either               
        1. Open the _Console_ tab.
-       2. Enter `console.log(localStorage.state);` and copy the result to the clipboard.
+       2. Enter `console.log(localStorage.state);`.
+       3. Click _Copy_ in the bottom right. This ensures you get all the data rather than possibly truncated output.
     - Or
         1. Open the _Application_ tab.
         2. Under _Storage_ then _Local Storage_, click on _chrome-extension://chphlpgkkbolifaimnlloiipkdnihall_.
         3. Where the Key is _state_, double-click the the corresponding value on the right then copy the content to the clipboard.
 6. Create a next text file somewhere and paste the copied single-line string into a tempory file. e.g. `~/temp.json`
-7. Prettify the contents of the JSON file and save it to the project.
+7. The following command will prettify the contents of the JSON file and save it to the project.
     ```bash
-    $ cat ~/temp.json | python -m json.tool > path/to/repo/url_manager/var/lib/raw/onetab_chrome_myco_personal.json
+    $ # In this example, I am at a machine at the company 'mycompany' and the profile has data for personal use.
+    $ cat ~/temp.json | python -m json.tool > path/to/repo/url_manager/var/lib/raw/onetab_chrome_mycompany_personal.json
     ```
 8. Go back to step 2 and repeat for your other Chrome profiles, as desired.
