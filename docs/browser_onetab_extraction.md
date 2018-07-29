@@ -4,16 +4,14 @@
 
 This section is applicable for both Chrome and Chromium web browsers. The two may both exist on the same system and both may be imported in the URL Manager application. 
 
-Before continuing, follow the [Identify Chrome Profiles](identify_chrome_profiles.md) instructions.
-
 1. Open Chrome.
-2. Change to the desired profile.
+2. Change to the desired profile username.
 3. Open the Onetab extension. Right-click the Onetab icon, then click _Display OneTab_. This should take you to a URL like [chrome-extension://chphlpgkkbolifaimnlloiipkdnihall/onetab.html](). The long value in the middle is the extension's ID.
 4. _Ctrl+Shift+I_ to Inspect the page.
 5. Get the Extension's data.
     - Either               
        1. Open the _Console_ tab.
-       2. Enter `console.log(localStorage.state);` and copy the result to the clipboard. TODO: Or JSON pretty.
+       2. Enter `console.log(localStorage.state);` and copy the result to the clipboard.
     - Or
         1. Open the _Application_ tab.
         2. Under Storage then Local Storage, click on _chrome-extension://chphlpgkkbolifaimnlloiipkdnihall_.
