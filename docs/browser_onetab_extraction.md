@@ -6,7 +6,7 @@ This section is applicable for both Chrome and Chromium web browsers. The two ma
 
 1. Open Chrome.
 2. Change to the desired profile username.
-3. Open the Onetab extension. Right-click the Onetab icon, then click _Display OneTab_. This should take you to a URL like [chrome-extension://chphlpgkkbolifaimnlloiipkdnihall/onetab.html](). The long value in the middle is the extension's ID.
+3. Open the Onetab extension. Right-click the Onetab icon, then click _Display OneTab_. This should take you to a URL like [chrome-extension://chphlpgkkbolifaimnlloiipkdnihall/onetab.html](chrome-extension://chphlpgkkbolifaimnlloiipkdnihall/onetab.html). The long value in the middle is the extension's ID.
 4. _Ctrl+Shift+I_ to Inspect the page.
 5. Get the Extension's data.
     - Either               
