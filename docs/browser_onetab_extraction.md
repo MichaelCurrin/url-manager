@@ -25,11 +25,11 @@ This section is applicable for both Chrome and Chromium web browsers. The two ma
     ```
     {"tabGroups":[{"id":"...","tabsMeta":[{"id":"...","url": ...
     ```
-7. The following command will prettify the contents of the JSON file and save it to the project.
+7. The following command will prettify the contents of the JSON file and save it to the project. The last two parts of the filename should indicate the location (such as the company where you work or 'private') and then the purpose of the profile (such as 'work', 'personal', 'programming' or 'research').
     ```bash
-    $ # In this example, I am at a machine at the company 'mycompany' and the profile has data for personal use.
-    $ cat ~/temp.json | python -m json.tool > path/to/repo/url_manager/var/lib/raw/onetab_chrome_mycompany_personal.json
-    $ # If you open the new file it should looke something like this:
+    $ cat ~/temp.json | python -m json.tool > path/to/repo/url_manager/var/lib/raw/chrome_onetab_mycompany_personal.json
+    $ # You can view the file if you want.
+    $ view path/to/repo/url_manager/var/lib/raw/chrome_onetab__mycompany_personal.json
     {
         "tabGroups": [
             {
