@@ -2,7 +2,7 @@
 
 How to get OneTab data from your browsers so that you can easily import into the URL Manager application.
 
-Note that OneTab does allow you to export URLs in its own format, however result is not in JSON structure and also omits some metadata.
+Note that altough OneTab itself does allow you to export URLs in its own text format, the result is not in JSON structure and also omits some metadata. Therefore this project's own data export process is preferred.
 
 ## Chrome
 
@@ -52,3 +52,20 @@ This section is applicable for both Chrome and Chromium web browsers. The two ma
     }
     ```
 8. Go back to step 2 and repeat for your other Chrome profiles, as desired.
+
+
+## Firefox
+
+Note that this has only been tested for Firefox and not Firefox Quantum.
+
+1. Open Firefox.
+2. Go to `about:profiles`. This will show you your Firefox users, with names and paths for each.
+3. Identify the path of the profile you want to get data for.
+4. Run the tool.
+    ```bash
+    $ # Use the value you got from the previous step.
+    $ INPUT=~/.mozilla/firefox/33boojgj.default/browser-extension-data/extension@one-tab.com/storage.js
+    $ # Use the full path to the raw directory and then provide a suitable name for the file.
+    $ OUTPUT=~/PATH/TO/REPO/url_manager/var/lib/raw/onetab_firefox_abc_personal.json
+    $ ./extract_onetab_storage.py $INPUT > $OUTPUT
+    ```
