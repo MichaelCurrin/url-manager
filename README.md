@@ -1,6 +1,15 @@
 # URL Manager
+>Centralise, view, edit, label and organise collections of your favorite URLs.
 
-_Centralise, view, edit, label and organise collections of your favorite URLs._
+The aim is to help you create and find your URL more efficiently and within a personalised structure. The result is a tool for you to import browser bookmark-related URL data from various sources and manage them in a single strucutred, easy-to-search datasource.
 
-The aim is to help you find bookmark and find what you need faster and with personalised structure. Import from Firefox or Chrome bookmark exports, history, onetab, a plain CSV or a manual entry.
+Import data from the following datasources:
 
+- bookmark files
+    * Firefox
+    * Chrome
+- history file
+- OneTab data
+- a CSV created by hand in the required format
+
+You can also add and manage records with a command-line tool.

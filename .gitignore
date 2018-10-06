@@ -16,5 +16,9 @@ url_manager/var/lib/db/*-journal
 # Local configuration files.
 url_manager/etc/*.local.*
 
+# Local data.
+url_manager/var/lib/*/*.json
+url_manager/var/lib/*/*.html
+
 # Log files.
 url_manager/var/log/*/*.log
