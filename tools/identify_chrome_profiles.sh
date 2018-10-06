@@ -1,42 +1,46 @@
-#!/bin/bash
-# For Google Chrome and Chromium browsers on the system, display the directory
-# names for profiles along with the corresponding profile's display name
-# (as normally seen in the top right corner of the browser window).
+#!/usr/bin/env bash
+# Show pairs of account name and display name for each Chrome-related user
+# on the system.
+#
+# The Preferences JSON file for each available account in the config data
+# is parsed and the display name. This works for Chrome and Chromium on
+# both Mac and Linux.
+#
+# Documented config data paths:
+#   https://chromium.googlesource.com/chromium/src/+/HEAD/docs/user_data_dir.md
 
+set -e
 
-# Python command to extract the profile display name from a browser profile's
-# preferences JSON file.
+# Extract the profile display name from preferences file on stdin.
 PY_CMD='import json, sys; print(json.load(sys.stdin)["profile"]["name"])'
 
+if [ "$(uname)" == 'Darwin' ]; then
+  CHROME_PATH="$HOME/Library/Application Support/Google/Chrome"
+  CHROMIUM_PATH="$HOME/Library/Application Support/Chromium"
+else
+  CHROME_PATH="$HOME/.config/google-chrome"
+  CHROMIUM_PATH="$HOME/.config/chromium"
+fi
 
-for BROWSER in google-chrome chromium
+for BROWSER_PATH in "$CHROME_PATH" "$CHROMIUM_PATH"
 do
-  echo $BROWSER
+  echo -e $(basename "$BROWSER_PATH")
 
-  BROWSER_CONF_PATH="$HOME/.config/$BROWSER"
-
-  FOUND=false
-
-  if [ -d $BROWSER_CONF_PATH ]
+  if [ -d "$BROWSER_PATH" ]
     then
-      for CHROME_USER in 'Default' 'Profile 1' 'Profile 2' 'Profile 3' \
+      for USERNAME in 'Default' 'Profile 1' 'Profile 2' 'Profile 3' \
         'Profile 4' 'Profile 5' 'Profile 6' 'Profile 7' 'Profile 8' 'Profile 9'
       do
-        if [ -d "$BROWSER_CONF_PATH/$CHROME_USER" ]
+        USER_CONFIG="$BROWSER_PATH/$USERNAME"
+        if [ -d "$USER_CONFIG" ]
           then
-            FOUND=true
-            PREF_PATH="$BROWSER_CONF_PATH/$CHROME_USER/Preferences"
-            DISPLAY_NAME=$(cat "$PREF_PATH" | python -c "$PY_CMD")
-            echo "  $CHROME_USER: $DISPLAY_NAME"
-        fi
-
-        if [ "$FOUND" = false ]
-          then
-            echo '0 profiles found'
+            DISPLAY_NAME=$(cat "$USER_CONFIG/Preferences" | python -c "$PY_CMD")
+            echo "  $USERNAME: $DISPLAY_NAME"
         fi
       done
+
     else
-      echo "Could not find config files - perhaps the browser is not installed"
+      echo "  Appears to not be installed"
     fi
   echo
 done
