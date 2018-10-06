@@ -56,15 +56,24 @@ This section is applicable for both Chrome and Chromium web browsers. The two ma
 
 ## Firefox
 
+Find the location of OneTab data for your Firefox user accounts and make it available in the project.
 Note that this has only been tested for Firefox and not Firefox Quantum.
+
+The approach below parses the data, gets the value for the `state` field and writes it to a
+JSON file in the project. Alternatively, one could create a symlink or copy of the original file.
 
 1. Open Firefox.
 2. Go to `about:profiles`. This will show you your Firefox users, with names and paths for each.
-3. Identify the path of the profile you want to get data for.
-4. Run the tool.
+3. Identify the path of the profile you want to get data for. Set it on a variable, like in the examples below.
     ```bash
-    $ # Use the value you got from the previous step.
-    $ INPUT=~/.mozilla/firefox/33boojgj.default/browser-extension-data/extension@one-tab.com/storage.js
+    # Linux.
+    FFOX_ACCOUNT_PATH=~/.mozilla/firefox/abcd1234.default
+    # Mac OS X. Note quotes to escape spaces.
+    FFOX_ACCOUNT_PATH="/Users/myuser/Library/Application Support/Firefox/Profiles/abcd1234.default"
+    ```
+4. Follow the commands below.
+    ```bash
+    $ INPUT="$FFOX_ACCOUNT_PATH/browser-extension-data/extension@one-tab.com/storage.js"
     $ # Use the full path to the raw directory and then provide a suitable name for the file.
     $ OUTPUT=~/PATH/TO/REPO/url_manager/var/lib/raw/onetab_firefox_abc_personal.json
     $ ./extract_onetab_storage.py $INPUT > $OUTPUT
