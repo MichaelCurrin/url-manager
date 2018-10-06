@@ -29,6 +29,9 @@ $ cp ~/.config/google-chrome/Profile\ 3/Bookmarks \
 You now have a reference to a single user's bookmarks in your project. Repeat the steps for all users which you want to import into the URL Manager application.
 
 
+Those steps above could be automated with a script, but then that will require handling OS and browser types and requiring inputs for username or display name (internally lookup username) and then a way to generate a filename or link name with some input.
+
+
 ### Export as JSON using JavaScript
 
 You can also use JavaScript to export Chrome (or Chromium) bookmarks to a text file, in JSON format. This is more tedious than the above method, but is included anyway for intrest.
