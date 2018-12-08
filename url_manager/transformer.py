@@ -164,7 +164,7 @@ def process_chrome_folder(folder):
 
 def transform_onetab(data):
     """
-    Transform Onetab data to the project's own structure then result results.
+    Process Onetab data and return in the project's own standard structure.
 
     @param data: dict of JSON data exported from Onetab browser extension,
         with structure as follows:
