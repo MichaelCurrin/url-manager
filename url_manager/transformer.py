@@ -134,6 +134,7 @@ def process_chrome_folder(folder):
     folders = {}
     urls = []
 
+    # TODO: Add logic to ensure folder's data is written to a unique key.
     for child in folder['children']:
         if child['type'] == 'folder':
             assert child['name'] not in folders, "Folder name '{}' already "\
