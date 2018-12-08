@@ -295,7 +295,8 @@ def main(args):
     """
     Handle command-line arguments.
 
-    # TODO: Use args to limit writing. And to read only certain file types.
+    TODO: Use args to limit writing. And to read only certain file types or
+    file name.
     """
     convert_and_write()
 
