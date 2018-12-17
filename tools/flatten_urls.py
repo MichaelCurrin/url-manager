@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 """
-Extract URLs and return as a formatted list of URLs.
+Extract URLs from text and return as a formatted list of URLs.
 
 Expect text input on stdin, such as piped in from a text file, which could have
 a URL anywhere in a line, even for JSON or CSV file. Extract a URL from
