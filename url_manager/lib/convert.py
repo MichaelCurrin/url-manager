@@ -10,31 +10,27 @@ DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 
 def from_chrome_epoch(value):
     """
-    Convert timestamp from Chrome's epoch format to a datetime object.
+    Convert a timestamp from Chrome's epoch format to a datetime object.
 
-    Chrome stores timestamps for bookmark and history records in the
-    Chrome epoch format.
-
-    See answer at: https://stackoverflow.com/questions/539900/google-bookmark-export-date-format
-        "Chrome uses a modified form of the Windows Time format
-        ("Windows epoch") for its timestamps, both in the Bookmarks file
-        and the history files. The Windows Time format is the number of
-        100ns-es since January 1, 1601. The Chrome format is the number of
-        microseconds since the same date, and thus 1/10 as large."
-    See also:
-        http://fileformats.archiveteam.org/wiki/Chrome_bookmarks
-
-    A Chrome epoch value can be converted to a unixtimestamp format using
-    a formula described here in a blog post:
+    Conversion from Chrome epoch (such as for bookmark or history record)
+    to unix timestamp is based on the formula here:
         http://linuxsleuthing.blogspot.co.za/2011/06/decoding-google-chrome-timestamps-in.html
 
-    :param chrome_epoch: Timestamp value in Chrome epoch format. As either
-        int, float or str.
+    :param value: Timestamp value in Chrome epoch format. As either an
+        int, float or str. e.g. 13182380056677741
 
-    :return: datetime.datetime object created from `chrome_epoch`.
+        From: https://stackoverflow.com/questions/539900/google-bookmark-export-date-format
+            "Chrome uses a modified form of the Windows Time format
+            ("Windows epoch") for its timestamps, both in the Bookmarks file
+            and the history files. The Windows Time format is the number of
+            100ns-es since January 1, 1601. The Chrome format is the number of
+            microseconds since the same date, and thus 1/10 as large."
+        See also:
+            http://fileformats.archiveteam.org/wiki/Chrome_bookmarks
+
+    :return: datetime.datetime object created from value.
     """
-    chrome_epoch = float(chrome_epoch)
-    unix_timestamp = chrome_epoch / 1000000 - 11644473600
+    unix_timestamp = float(value) / 1000000 - 11644473600
 
     return datetime.datetime.fromtimestamp(unix_timestamp)
 
