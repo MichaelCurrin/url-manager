@@ -143,7 +143,7 @@ def process_chrome_folder(folder):
             subfolder_name, child_data = process_chrome_folder(child)
             folders[subfolder_name] = child_data
         elif child['type'] == 'url':
-            date_added = convert.from_chrome_time(child['date_added'])
+            date_added = convert.from_chrome_epoch(child['date_added'])
 
             url = {
                'title': child['name'],

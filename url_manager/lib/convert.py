@@ -8,7 +8,7 @@ import datetime
 DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 
 
-def from_chrome_time(chrome_epoch):
+def from_chrome_epoch(value):
     """
     Convert timestamp from Chrome's epoch format to a datetime object.
 
