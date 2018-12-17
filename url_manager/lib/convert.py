@@ -35,16 +35,16 @@ def from_chrome_epoch(value):
     return datetime.datetime.fromtimestamp(unix_timestamp)
 
 
-def from_onetab_time(onetab_epoch):
+def from_onetab_time(value):
     """
     Convert time from Onetab's epoch to Python datetime object.
 
-    :param onetab_epoch: Numeric value for the OneTab browser extension's
+    :param value: Numeric value for the OneTab browser extension's
         epoch time. This follows the unix timestamp standard, but in
         milliseconds.
 
-    :return: datetime.datetime object created from `onetab_epoch`.
+    :return: datetime.datetime object created from value.
     """
-    seconds = float(onetab_epoch) / 1000
+    seconds = float(value) / 1000
 
     return datetime.datetime.fromtimestamp(seconds)
