@@ -35,7 +35,7 @@ def from_chrome_epoch(value):
     return datetime.datetime.fromtimestamp(unix_timestamp)
 
 
-def from_onetab_time(value):
+def from_onetab_epoch(value):
     """
     Convert time from Onetab's epoch to Python datetime object.
 

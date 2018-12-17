@@ -208,7 +208,7 @@ def transform_onetab(data):
 
     for group in groups:
         group_time = group['createDate']
-        date_added = convert.from_onetab_time(group_time)
+        date_added = convert.from_onetab_epoch(group_time)
 
         folder_name = group.get('label', None)
         if folder_name is None:
