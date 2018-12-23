@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env bash -e
 # Show pairs of account name and display name for each Chrome-related user
 # on the system.
 #
@@ -9,12 +9,11 @@
 # Documented config data paths:
 #   https://chromium.googlesource.com/chromium/src/+/HEAD/docs/user_data_dir.md
 
-set -e
-
-# Extract the profile display name from preferences file on stdin.
+# Extract the Chrome profile's display name from a JSON
+# preferences JSON file given on stdin.
 PY_CMD='import json, sys; print(json.load(sys.stdin)["profile"]["name"])'
 
-# TODO Get from lib module.
+# TODO: Get from lib module.
 if [ "$(uname)" == 'Darwin' ]; then
   CHROME_PATH="$HOME/Library/Application Support/Google/Chrome"
   CHROMIUM_PATH="$HOME/Library/Application Support/Chromium"
