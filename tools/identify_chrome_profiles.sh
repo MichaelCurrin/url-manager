@@ -34,7 +34,7 @@ do
         USER_CONFIG="$BROWSER_PATH/$USERNAME"
         if [ -d "$USER_CONFIG" ]
           then
-            DISPLAY_NAME=$(cat "$USER_CONFIG/Preferences" | python -c "$PY_CMD")
+            DISPLAY_NAME=$(python -c "$PY_CMD" < "$USER_CONFIG/Preferences")
             echo "  $USERNAME: $DISPLAY_NAME"
         fi
       done
