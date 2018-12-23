@@ -19,9 +19,9 @@ from lib import BROWSER_PROFILE_DIRS
 
 FIREFOX_ONETAB = "browser-extension-data/extension@one-tab.com/storage.js"
 CHROME_ONETAB = "Local Storage/leveldb"
-# The plyvel docs recommend keeping keys in binary form. This key can be
-# identified by using `leveldbutil dump path/to/leveldb` after installing
-# the util. Or
+
+# The plyvel docs recommend referencing LevelDB keys in the
+# binary form (which is how they are stored).
 LEVELDB_ONETAB_KEY = b'_chrome-extension://chphlpgkkbolifaimnlloiipkdnihall\x00\x01state'
 
 
