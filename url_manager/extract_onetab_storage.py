@@ -27,7 +27,7 @@ LEVELDB_ONETAB_KEY = b'_chrome-extension://chphlpgkkbolifaimnlloiipkdnihall\x00\
 
 def parse_leveldb_bytes(data_bytes):
     """
-    Expect input as bytes, convert to human-readable format and return.
+    Parse LevelDB OneTab data from bytes to dict.
 
     The encoding of the bytes state data in the database is not UTF-8 or
     ASCII, so this function takes unreadable data and makes sense of it. This
@@ -50,7 +50,8 @@ def parse_leveldb_bytes(data_bytes):
     using slicing, as an easy but inelegant alternative to decoding.
 
     :param data_bytes: OneTab data as a bytes string, as retrieved from
-        the Chrome leveldb storage.
+        the Chrome LevelDB storage. This should be in a JSON format
+        when viewed as a string.
 
     :return: dict of data.
     """
