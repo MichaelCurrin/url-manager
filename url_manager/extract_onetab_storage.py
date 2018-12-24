@@ -2,8 +2,8 @@
 """
 OneTab storage extractor.
 
-Parse OneTab data stored in Firefox's JSON or Chrome's LevelDB storage,
-then pretty print the user data.
+Parse OneTab data stored in Firefox's JSON file or Chrome's LevelDB
+storage, then pretty print the OneTab user data as JSON.
 
 See the docs/browsers_onetab_extraction.md file for instructions.
 """
@@ -100,15 +100,15 @@ def read_storage(browser, username):
             ]
         }
     :raises plyvel._plyvel.IOError: This error occurs if the database locked by
-        another process which has it open still, such as script or your
+        another process which has it open still, such as a script or your
         actual browser.
     """
     browser_profile_dir = BROWSER_PROFILE_DIRS[browser]
-    chrome_like = (browser.startswith('Chrom'))
+    is_chrome_like = (browser.startswith('Chrom'))
     in_path = os.path.join(browser_profile_dir, username,
-                           CHROME_ONETAB if chrome_like else FIREFOX_ONETAB)
+                           CHROME_ONETAB if is_chrome_like else FIREFOX_ONETAB)
 
-    if chrome_like:
+    if is_chrome_like:
         db = plyvel.DB(in_path)
         state_data_bytes = db.get(LEVELDB_ONETAB_KEY)
         data = parse_leveldb_bytes(state_data_bytes)
@@ -133,7 +133,7 @@ def main():
     parser.add_argument(
         'USERNAME',
         help="You browser account username. e.g. 'Default' or 'Profile 1' for"
-             " Chrome or 'abcdef.default' for Firefox."
+             " Chrome or 'abcdef.default' for Firefox. See browser_onetab_extraction.md in docs."
     )
 
     args = parser.parse_args()
