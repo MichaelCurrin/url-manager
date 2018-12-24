@@ -36,7 +36,7 @@ def parse_leveldb_bytes(data_bytes):
     get overwritten later anyway by hand or reading fresh metadata from the
     site).
 
-    The b'\x00' character is repeated throughout at every second character and
+    The b"\x00" character is repeated throughout at every second character and
     shows as a box when printed. It could be a null character, but
     apparently the meaning of the character depends on the encoding so it could
     be anything. Dropping it mostly works well.
@@ -47,30 +47,29 @@ def parse_leveldb_bytes(data_bytes):
     very useful. It has few symbols (punctuation, and emojis and escaped quotes)
     which need to be corrected.
 
-    Note also that bytes value of "b'...'" is converted to simply "..."
-    using str casting followed by slicing, as an easy but inelegant alternative
-    to decoding.
-
     :param data_bytes: OneTab data as a bytes string, as retrieved from
         the Chrome LevelDB storage. This should be in a JSON format
         when viewed as a string.
 
     :return: dict of data.
     """
-    data_bytes = data_bytes.replace(b'\x00', b'')
+    data_bytes = data_bytes.replace(b"\x00", b"")
+
+    # Get string representation of bytes to avoid issues caused by
+    # decoding. Then remove the leading b" and trailing ".
     data_str = str(data_bytes)[2:-1]
 
     # Turn escaped double slash into single slash and
     # escaped single quotes to a single quote.
-    data_str = data_str.replace('\\\\', '\\').replace("\\'", "'")
+    data_str = data_str.replace("\\\\", "\\").replace("\\'", "'")
 
     # Remove carriage returns which sometimes appear in titles.
     # There is no "\n" after it in the cases seen. This replacment
     # could break Windows compatibility of this project.
-    data_str = data_str.replace('\\r', '')
+    data_str = data_str.replace("\\r", "")
 
     # Remove any characters which still look like bytes.
-    data_str = re.sub(r'\\x\w\w', '⍰', data_str)
+    data_str = re.sub(r"\\x\w\w", "⍰", data_str)
 
     return json.loads(data_str)
 
