@@ -60,7 +60,7 @@ def process_chrome_bookmarks(data):
     Process input Chrome bookmark data. With a folder, separate the children
     items, which are a mix of folders and URLs. Only extract required fields.
 
-    @param data: dict object from a Chromer profile's Prefereces JSON file.
+    :param data: dict object from a Chromer profile's Prefereces JSON file.
         With structure as:
             {
                 'roots': {
@@ -73,7 +73,7 @@ def process_chrome_bookmarks(data):
                 'version': int
             }
 
-    @return out_data: dict of transformed Chrombe book data, with structure
+    :return out_data: dict of transformed Chrombe book data, with structure
         as per this module's docstring.
     """
     bookmark_data = data['roots']
@@ -101,10 +101,10 @@ def process_chrome_folder(folder):
     Note: dict_keys(['children', 'date_modified', 'type', 'date_added',
                      'name', 'id'])
 
-    @param folder: dict of data for a folder. The folder can contain URL data
+    :param folder: dict of data for a folder. The folder can contain URL data
         and subfolders (which are processed recursively).
 
-    @return: 2-tuple of folder_name and child_data.
+    :return: 2-tuple of folder_name and child_data.
         folder_name: The name of the current folder.
         child_data: dict object with the following structure:
                 {
@@ -114,7 +114,7 @@ def process_chrome_folder(folder):
                     }
                 }
             Where the value for 'folders' values is a dict of zero or more
-            folders, each with recusive structure the same as the child_data
+            folders, each with recursive structure the same as the child_data
             structure.
 
             And where the value for 'urls' is a list of zero or more dict
@@ -134,7 +134,6 @@ def process_chrome_folder(folder):
     folders = {}
     urls = []
 
-    # TODO: Add logic to ensure folder's data is written to a unique key.
     for child in folder['children']:
         if child['type'] == 'folder':
             assert child['name'] not in folders, "Folder name '{}' already "\
@@ -166,7 +165,7 @@ def transform_onetab(data):
     """
     Process Onetab data and return in the project's own standard structure.
 
-    @param data: dict of JSON data exported from Onetab browser extension,
+    :param data: dict of JSON data exported from Onetab browser extension,
         with structure as follows:
             {
                 'tabGroups': [
@@ -199,7 +198,7 @@ def transform_onetab(data):
         This produces a deterministic result, which is preferred over a random
         value.
 
-    @return out_data: dict of transformed Onetab data, with structure
+    :return out_data: dict of transformed Onetab data, with structure
         as per this module's docstring.
     """
     groups = data['tabGroups']
@@ -291,15 +290,12 @@ def convert_and_write():
         transform_file(in_path)
 
 
-def main(args):
+def main():
     """
     Handle command-line arguments.
-
-    TODO: Use args to limit writing. And to read only certain file types or
-    file name.
     """
     convert_and_write()
 
 
 if __name__ == '__main__':
-    main(sys.argv[1:])
+    main()
