@@ -42,7 +42,7 @@ def parse_leveldb_bytes(data_bytes):
     be anything. Dropping it mostly works well.
     Though its use can be seen when doing `data.decode('ascii', errors=ignore)`
     with or without it and seeing how some important fields are garbled.
-    When removing this character and not using .`decode`, the str representation
+    When removing this character and not using `.decode`, the str representation
     looks much neater and is very useful. It has few symbols (punctuation,
     and emojis and escaped quotes) which need to be corrected.
 
