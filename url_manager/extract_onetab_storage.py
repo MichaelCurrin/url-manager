@@ -40,14 +40,16 @@ def parse_leveldb_bytes(data_bytes):
     shows as a box when printed. It could be a null character, but
     apparently the meaning of the character depends on the encoding so it could
     be anything. Dropping it mostly works well.
-    Though its use can be seen when doing `data.decode('ascii', errors=ignore)`
-    with or without it and seeing how some important fields are garbled.
-    When removing this character and not using `.decode`, the str representation
-    looks much neater and is very useful. It has few symbols (punctuation,
-    and emojis and escaped quotes) which need to be corrected.
+
+    When keeping it in during testing with `data.decode('ascii', errors=ignore)`
+    meant that some important fields are garbled. When removing this character
+    and not using `.decode`, the str representation looks much neater and is
+    very useful. It has few symbols (punctuation, and emojis and escaped quotes)
+    which need to be corrected.
 
     Note also that bytes value of "b'...'" is converted to simply "..."
-    using slicing, as an easy but inelegant alternative to decoding.
+    using str casting followed by slicing, as an easy but inelegant alternative
+    to decoding.
 
     :param data_bytes: OneTab data as a bytes string, as retrieved from
         the Chrome LevelDB storage. This should be in a JSON format
