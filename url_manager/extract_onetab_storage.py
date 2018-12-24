@@ -17,6 +17,8 @@ import plyvel
 from lib import BROWSER_PROFILE_DIRS
 
 
+# Path to OneTab data within a directory for a browser user. This
+# is for both Linux and Mac.
 FIREFOX_ONETAB = "browser-extension-data/extension@one-tab.com/storage.js"
 CHROME_ONETAB = "Local Storage/leveldb"
 
@@ -76,11 +78,15 @@ def parse_leveldb_bytes(data_bytes):
 
 def read_storage(browser, username):
     """
-    Read OneTab JSON or leveldb data on disk and return as dict.
+    Read OneTab JSON or LevelDB data on disk and return as dict.
 
-    Reads Chrome or Chromium leveldb database or a Firefox storage JSON.
-    Note that the useful value in the Firefox storage is a string which needs
-    parsing.
+    Read Chrome or Chromium leveldb database or a Firefox storage JSON
+    for a specified browser user.
+
+    :browser: Name of browser. This must be one of the keys of
+        BROWSER_PROFILE_DIRS otherwise an error will be raised.
+    :username: Name of browser user for the specified browser. An
+        error will be raised if this is not valid.
 
     :return data: dict of OneTab state data in the follow format:
         {
@@ -99,9 +105,11 @@ def read_storage(browser, username):
                 ...
             ]
         }
-    :raises plyvel._plyvel.IOError: This error occurs if the database locked by
-        another process which has it open still, such as a script or your
-        actual browser.
+    :raises plyvel._plyvel.IOError: Occurs if the file does not exist or the
+        database is locked by another process which has it open still, such as
+        a script or your actual browser.
+    :raises FileNotFoundError: If the Firefox file cannot be found to the given
+        username.
     """
     browser_profile_dir = BROWSER_PROFILE_DIRS[browser]
     is_chrome_like = (browser.startswith('Chrom'))
@@ -115,6 +123,7 @@ def read_storage(browser, username):
     else:
         with open(in_path) as f_in:
             raw_data = json.load(f_in)
+        # The value within the JSON is a plain string and also needs parsing.
         data = json.loads(raw_data['state'])
 
     return data
@@ -128,7 +137,7 @@ def main():
 
     parser.add_argument(
         'BROWSER',
-        choices=['Chrome', 'Chromium', 'Firefox']
+        choices=sorted(BROWSER_PROFILE_DIRS.keys())
     )
     parser.add_argument(
         'USERNAME',

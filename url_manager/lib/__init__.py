@@ -23,19 +23,17 @@ def browser_profile_dir(is_linux):
     """
     Return paths to profile data for supported browsers and the relevant OS.
 
-    Values which are not yet completed return as None.
+    Quantum could appear here if ever supported.
     """
     if is_linux:
         data = {
             'Firefox': "~/.mozilla/firefox",
-            'Quantum': None,
             'Chrome': "~/.config/google-chrome",
             'Chromium': "~/.config/chromium"
         }
     else:
         data = {
             'Firefox': "~/Library/Application Support/Firefox/Profiles",
-            'Quantum': None,
             'Chrome': "~/Library/Application Support/Google/Chrome",
             'Chromium': "~/Library/Application Support/Chromium"
         }
