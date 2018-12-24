@@ -4,7 +4,7 @@ Export bookmark data from webbrowsers and save as text files. These can then by 
 
 ## Chrome
 
-This section is applicable for both Chrome and Chromium web browsers. The two may both exist on the same system and both may be imported in the URL Manager application. 
+This section is applicable for both Chrome and Chromium web browsers. The two may both exist on the same system and both may be imported in the URL Manager application.
 
 Before continuing, follow the [Identify Chrome Profiles](identify_chrome_profiles.md) instructions.
 
@@ -16,14 +16,14 @@ Put a link to the user's Preferences file in the project. The linked file will a
 
 ```bash
 $ ln -s ~/.config/google-chrome/Profile\ 3/Bookmarks \
-  url_manager/var/lib/raw/bookmarks_chrome_research.json 
+    url_manager/var/lib/raw/bookmarks_chrome_research.json
 ```
 
 Or, make a copy of the preferences data in the project. Though, this duplicated file will not be updated if the original changes so this is not recommended unless you want to experiment with editing the copy by hand.
 
 ```bash
 $ cp ~/.config/google-chrome/Profile\ 3/Bookmarks \
- url_manager/var/lib/raw/bookmarks_chrome_research.json
+    url_manager/var/lib/raw/bookmarks_chrome_research.json
 ```
 
 You now have a reference to a single user's bookmarks in your project. Repeat the steps for all users which you want to import into the URL Manager application.
@@ -42,7 +42,7 @@ You can also use JavaScript to export Chrome (or Chromium) bookmarks to a text f
 3. Click the _Bookmarks to JSON Extension_ icon and Options item.
 4. Open the developer console (`ctrl+shift+i`).
 5. Open the JavaScript _Console_ tab.
-6. To get the data as single string indented to 4 spaces, paste the following in and press enter: 
+6. To get the data as single string indented to 4 spaces, paste the following in and press enter:
     ```javascript
     > chrome.bookmarks.getTree(function (tree) { console.log(JSON.stringify(tree, null, 4)) ;  } ) ;
     ```
