@@ -44,8 +44,8 @@ Find the location of OneTab data for your Chrome or Chromium user accounts and m
 
 The approach below reads the OneTab extension data from Chrome's LevelDB storage then gets the value of 'state' field within it.
 
-1. Get a list of usernames and display names on your system using the instructions in [identify_chrome_profiles.sh](/tools/identify_chrome_profiles.sh).
-2. Identify the browser and username you want to target.
+1. Get a list of usernames and display names on your system as covered by the [Identify Chrome Profiles](/docs/identify_chrome_profiles.md) doc.
+2. Decide on the browser and username you want to target.
 3. Follow the commands below to enter the browser and username and save the output. An example is shown below.
     ```bash
     $ # Use the full path to the raw directory and then provide a suitable name for the file.
