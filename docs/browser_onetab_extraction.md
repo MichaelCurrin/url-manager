@@ -8,7 +8,7 @@ Note that although OneTab itself _does_ allow you to export your URL data in its
 https:/example.com | Example title
 https://abc.com | ABC website
 
-https://anothersire | Another title in a new section but with no section heading
+https://anothersite.com | Another title in a new section but with no section heading
 ```
 
 However, the result is not in a JSON structure and also omits metadata like custom titles and times. Therefore this project's own data export process is preferred.
