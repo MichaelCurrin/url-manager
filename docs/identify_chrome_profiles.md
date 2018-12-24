@@ -1,26 +1,20 @@
 # Identify Chrome Profiles
 
-Instructions to get an overview of where your Chrome and Chromium profiles are on your system and how the directory and display names are paired.
+Instructions for how to get an overview of where your Chrome and Chromium profiles are on your system and how the directory and display names are paired.
 
-
-## Background
-
-Your browser profiles are stored here:
-
-```
-~/.config/google-chrome
-~/.config/chromium
-```
+Your browser user data is stored in a location based on whether you are using Chrome or Chromium and Linux of macOS. Those cases are handled with the instructions below.
 
 
 ## Match names and paths
 
-Below are two approaches to identify all pairs of profile names and profiles paths, across Chrome and Chromium browsers. The first uses the project's own tool and is more efficient.
+Below are two approaches to identify all pairs names and paths for your Chrome-like browsers.
 
 
 ### The automated way
 
-This uses the [Identify Chrome Profiles](/tools/identify_chrome_profiles.sh) tool. Within each browser, the directory for the profile is shown against the display name.
+This uses the [Identify Chrome Profiles](/tools/identify_chrome_profiles.sh) tool, which is a standlone script which can be run from anywhere.
+
+Within each browser, the directory for the profile is shown against the browser user display name.
 
 ```bash
 $ cd path/to/repo
@@ -38,16 +32,15 @@ chromium
 In the above example, there are 3 Chrome and 1 Chromium user present on this system. Arbitrarily, up to 10 profiles of each are supported by this tool.
 
 
-## The manual way
+### The manual way
 
-This is a slower alternative and involves using the browser.
+This is a slower alternative and involves using the actual browser.
 
 1. Open Chrome (or Chromium).
-2. Switch to a profile
+2. Switch to a profile.
 3. Enter the following URL: _chrome://version/_
 4. And then see the _Profile Path_ field and note the value for the profile.
-
-Repeat for your users and browsers.
+5. Repeat for remaining browser and users.
 
 Example output for two browsers.
 
