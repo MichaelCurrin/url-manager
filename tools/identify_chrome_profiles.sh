@@ -13,7 +13,6 @@
 # preferences JSON file given on stdin.
 PY_CMD='import json, sys; print(json.load(sys.stdin)["profile"]["name"])'
 
-# TODO: Get from lib module.
 if [ "$(uname)" == 'Darwin' ]; then
   CHROME_PATH="$HOME/Library/Application Support/Google/Chrome"
   CHROMIUM_PATH="$HOME/Library/Application Support/Chromium"
