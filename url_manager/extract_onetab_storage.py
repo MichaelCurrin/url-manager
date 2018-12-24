@@ -57,9 +57,16 @@ def parse_leveldb_bytes(data_bytes):
     """
     data_bytes = data_bytes.replace(b'\x00', b'')
     data_str = str(data_bytes)[2:-1]
-    # Turn escaped double slash into single slash, which has quotes after it.
-    # Also any escaped single quotes can just become a single quote.
+
+    # Turn escaped double slash into single slash and
+    # escaped single quotes to a single quote.
     data_str = data_str.replace('\\\\', '\\').replace("\\'", "'")
+
+    # Remove carriage returns which sometimes appear in titles.
+    # There is no "\n" after it in the cases seen. This replacment
+    # could break Windows compatibility of this project.
+    data_str = data_str.replace('\\r', '')
+
     # Remove any characters which still look like bytes.
     data_str = re.sub(r'\\x\w\w', '⍰', data_str)
 
