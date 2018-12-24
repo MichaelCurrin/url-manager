@@ -1,6 +1,6 @@
 # Identify Chrome Profiles
 
-Instructions to get an overview of where your Chrome and Chromium profiles are on your system and how the directory and display names are paired.
+Instructions for how to get an overview of where your Chrome and Chromium profiles are on your system and how the directory and display names are paired.
 
 Your browser user data is stored in a location based on whether you are using Chrome or Chromium and Linux of macOS. Those cases are handled with the instructions below.
 
@@ -32,7 +32,7 @@ chromium
 In the above example, there are 3 Chrome and 1 Chromium user present on this system. Arbitrarily, up to 10 profiles of each are supported by this tool.
 
 
-## The manual way
+### The manual way
 
 This is a slower alternative and involves using the actual browser.
 
