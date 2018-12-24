@@ -24,12 +24,12 @@ def initialize(drop_all=False, create_all=True):
     Gets class objects from the imported list of names. By default, no tables
     are dropped and all tables are created or skipped.
 
-    @param dropAll: Default False. If set to True, drop all tables before
+    :param dropAll: Default False. If set to True, drop all tables before
         creating them.
-    @param createAll: Default True. Iterate through table names and create
+    :param createAll: Default True. Iterate through table names and create
         the tables which they do not exist yet.
 
-    @return: Count of table models in the available list.
+    :return: Count of table models in the available list.
     """
     models_list = []
 
