@@ -2,8 +2,9 @@
 
 How to get OneTab data from your browsers so that you can easily import into the URL Manager application.
 
-Note that altough OneTab itself does allow you to export URLs in its own text format, the result is not in JSON structure and also omits some metadata. Therefore this project's own data export process is preferred.
+Note that although OneTab itself does allow you to export URLs in its own text format, the result is not in JSON structure and also omits some metadata. Therefore this project's own data export process is preferred.
 
+TODO: Instead of writing to stdout and a full path, write to a file in the project using detailed parameters or a filename.
 
 ## Firefox
 
@@ -25,13 +26,11 @@ The approach below parses the storage.json and gets the value of 'state' field i
     ```
 5. Go back to step 3 and repeat for other profiles as desired.
 
-TODO: Write to a file in the project using detailed parameters or a filename.
-
 
 ## Chrome
 
-This section is applicable for both Chrome and Chromium browsers. The two may both exist on the 
-same system and both may be imported into the URL Manager application. 
+This section is applicable for both Chrome and Chromium browsers. The two may both exist on the
+same system and both may be imported into the URL Manager application.
 
 
 ### The easy way
@@ -42,7 +41,7 @@ in the project.
 The approach below parses the storage.json and gets the value of 'state' field inside it.
 
 1. Get a list of usernames and display names on your system using the instructions in
-  [identity_chrome_profiles.sh](identity_chrome_profiles.sh).
+  [identify_chrome_profiles.sh](/tools/identify_chrome_profiles.sh).
 2. Identify the browser and username you want to target.
 3. Follow the commands below to enter the browser and username and save the output. An example
     is shown below.
@@ -62,7 +61,7 @@ The approach below parses the storage.json and gets the value of 'state' field i
 3. Open the Onetab extension. Right-click the Onetab icon, then click _Display OneTab_. This should take you to a URL like _chrome-extension://chphlpgkkbolifaimnlloiipkdnihall/onetab.html_. The long value in the middle is the extension's ID.
 4. _Ctrl+Shift+I_ to Inspect the page.
 5. Get the Extension's data.
-    - Either               
+    - Either
        1. Open the _Console_ tab.
        2. Enter `console.log(localStorage.state);`.
        3. Click _Copy_ in the bottom right. This ensures you get all the data rather than possibly truncated output.
@@ -70,7 +69,7 @@ The approach below parses the storage.json and gets the value of 'state' field i
         1. Open the _Application_ tab.
         2. Under _Storage_ then _Local Storage_, click on _chrome-extension://chphlpgkkbolifaimnlloiipkdnihall_.
         3. Where the Key is _state_, double-click the the corresponding value on the right then copy the content to the clipboard.
-6. Create a next text file somewhere and paste the copied single-line string into a tempory file. e.g. `~/temp.json`. The file will start like this:
+6. Create a next text file somewhere and paste the copied single-line string into a temporary file. e.g. `~/temp.json`. The file will start like this:
     ```
     {"tabGroups":[{"id":"...","tabsMeta":[{"id":"...","url": ...
     ```
