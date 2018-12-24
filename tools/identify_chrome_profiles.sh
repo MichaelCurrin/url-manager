@@ -1,4 +1,4 @@
-#!/usr/bin/env bash -e
+#!/bin/bash -e
 # Show pairs of account name and display name for each Chrome-related user
 # on the system.
 #
@@ -8,6 +8,7 @@
 #
 # Documented config data paths:
 #   https://chromium.googlesource.com/chromium/src/+/HEAD/docs/user_data_dir.md
+#
 
 # Extract the Chrome profile's display name from a JSON
 # preferences JSON file given on stdin.
