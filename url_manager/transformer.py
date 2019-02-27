@@ -44,7 +44,6 @@ Notes on OneTab data:
 import glob
 import json
 import os
-import sys
 
 from lib import convert
 from lib.config import AppConf
