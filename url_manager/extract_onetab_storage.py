@@ -11,11 +11,15 @@ import argparse
 import json
 import re
 import os
+import sys
 
 import plyvel
 
 from lib import BROWSER_PROFILE_DIRS
+from lib.config import AppConf
 
+
+conf = AppConf()
 
 # Path to OneTab data within a directory for a browser user. This
 # is for both Linux and Mac.
@@ -30,6 +34,10 @@ LEVELDB_ONETAB_KEY = b'_chrome-extension://chphlpgkkbolifaimnlloiipkdnihall\x00\
 def parse_leveldb_bytes(data_bytes):
     """
     Parse LevelDB OneTab data from bytes to dict.
+
+    The bytes data is first cleaned then parsed as JSON. On a parsing error,
+    write out raw and cleaned inputs to the debug directory,
+    print the error message and exit with an error status code.
 
     The encoding of the bytes state data in the database is not UTF-8 or
     ASCII, so this function takes unreadable data and makes sense of it. This
@@ -61,10 +69,14 @@ def parse_leveldb_bytes(data_bytes):
 
     # Get string representation of bytes to avoid issues caused by
     # decoding. Then remove the leading b" and trailing ".
-    data_str = str(data_bytes)[2:-1]
+    raw_str = str(data_bytes)[2:-1]
 
     # Convert double backlash to single. This handles cases like '\\"' => '\"'.
-    data_str = data_str.replace("\\\\", "\\")
+    data_str = raw_str.replace('\\\\', '\\')
+
+    # Edgecase handled by inspection on a title about union and intersection,
+    data_str = data_str.replace('(*")', '(&)')
+    data_str = data_str.replace('()")', '(|)')
 
     # Unescape single quote.
     data_str = data_str.replace(r"\'", r"'")
@@ -84,7 +96,25 @@ def parse_leveldb_bytes(data_bytes):
     # Remove any characters which still look like bytes.
     data_str = re.sub(r"\\x\w\w", "⍰", data_str)
 
-    return json.loads(data_str)
+    data_str = data_str.replace("\\⍰", "⍰")
+
+    try:
+        return json.loads(data_str)
+    except json.JSONDecodeError as e:
+        print(f"{type(e).__name__}: {str(e)}")
+
+        var_dir = conf.get('text_files', 'debug')
+        raw_path = os.path.join(var_dir, 'leveldb_onetab_raw.json')
+        cleaned_path = os.path.join(var_dir, 'leveldb_onetab_cleaned.json')
+        with open(raw_path, 'w') as f_out:
+            f_out.writelines(raw_str)
+        with open(cleaned_path, 'w') as f_out:
+            f_out.writelines(data_str)
+        print(f"Wrote raw data to: {raw_path}")
+        print(f"Wrote cleaned data containing JSON formatting error to:"
+              f" {cleaned_path}")
+
+        sys.exit(1)
 
 
 def read_storage(browser, username):
