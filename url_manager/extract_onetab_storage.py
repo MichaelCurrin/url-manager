@@ -3,7 +3,9 @@
 OneTab storage extractor.
 
 Parse OneTab data stored in Firefox's JSON file or Chrome's LevelDB
-storage, then pretty print the OneTab user data as JSON.
+storage, then pretty print the OneTab user data as JSON. Data is cleaned as
+part of parsing but no restructuring is done.
+
 
 See the docs/browsers_onetab_extraction.md file for instructions.
 """
@@ -74,10 +76,13 @@ def parse_leveldb_bytes(data_bytes):
     # Convert double backlash to single. This handles cases like '\\"' => '\"'.
     data_str = raw_str.replace('\\\\', '\\')
 
-    # Edgecase handled by inspection on a title about union and intersection,
-    data_str = data_str.replace('(*")', '(&)')
-    data_str = data_str.replace('()")', '(|)')
-
+    # Edgecase - a title with union and intersection.
+    # Repeat 3? why doesn't it pick up later?
+    # TODO TEST MORE. chrome and FF
+    data_str = data_str.replace('\xe2\x88\xaa', '!!!')
+    # TODO TEST MORE. chrome and FF
+    data_str = data_str.replace('()")', '(∩)')
+    # http://www.personal.psu.edu/ejp10/blogs/gotunicode/2007/09/inserting-the-union-and-inters-1.html
     # Unescape single quote.
     data_str = data_str.replace(r"\'", r"'")
 
@@ -101,6 +106,7 @@ def parse_leveldb_bytes(data_bytes):
     try:
         return json.loads(data_str)
     except json.JSONDecodeError as e:
+        # Run everytime?
         print(f"{type(e).__name__}: {str(e)}")
 
         var_dir = conf.get('text_files', 'debug')

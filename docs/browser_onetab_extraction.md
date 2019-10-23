@@ -23,12 +23,11 @@ The approach below parses the `storage.json` and gets the value of 'state' field
 1. Open Firefox.
 2. Go to the [about:profiles](about:profiles) page. This will show you your Firefox users.
 3. Choose the profile you want, look at the paths and copy the username from one. e.g. `abcd1234.default`
-4. Follow the commands below to enter the browser and username and save the output. An example is shown below.
+4. Follow the commands below to enter the browser and username and save the output. An example is shown below. Set your username as the second argument.
     ```bash
-    $ # Use the full path to the raw directory and then provide a suitable name for the file.
-    $ OUTPUT=~/PATH/TO/REPO/url_manager/var/lib/raw/onetab_firefox_abc_personal.json
-    $ # Set your username as the second argument.
-    $ ./extract_onetab_storage.py Firefox abcd1234.default > $OUTPUT
+    # TODO: Make this part of script
+    # See also debug
+    $ ./extract_onetab_storage.py Firefox abcd1234.default > var/lib/raw/onetab_firefox_abc_personal.json
     ```
 5. Go back to step 3 and repeat for other profiles as desired.
 
