@@ -82,6 +82,8 @@ This approach was initially created as a manual step which can be ignored if the
         > path/to/repo/url_manager/var/lib/raw/chrome_onetab_mycompany_personal.json
     $ # You can view the file if you want.
     $ view path/to/repo/url_manager/var/lib/raw/chrome_onetab__mycompany_personal.json
+    ```
+    ```json
     {
         "tabGroups": [
             {
@@ -92,9 +94,9 @@ This approach was initially created as a manual step which can be ignored if the
                         "title": "...",
                         "url": "https://..."
                     },
-                    ...
+                    // ...
                 ]
-                ...
+                // ...
             }
         ]
     }
