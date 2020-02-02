@@ -25,6 +25,8 @@ conf = AppConf()
 
 # Path to OneTab data within a directory for a browser user. This
 # is for both Linux and Mac.
+# FIXME: This does not work after March 2019. There is a storage.js.migrated
+# file and the new one is somewhere else.
 FIREFOX_ONETAB = "browser-extension-data/extension@one-tab.com/storage.js"
 CHROME_ONETAB = "Local Storage/leveldb"
 
