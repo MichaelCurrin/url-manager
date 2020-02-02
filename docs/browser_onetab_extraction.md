@@ -25,7 +25,7 @@ The approach below parses the `storage.json` and gets the value of 'state' field
 3. Choose the profile you want, look at the paths and copy the username from one. e.g. `abcd1234.default`
 4. Follow the commands below to enter the browser and username and save the output. An example is shown below. Set your username as the second argument.
     ```bash
-    # TODO: Make this part of script
+    # TODO: Make this part of script and config
     # See also debug
     $ ./extract_onetab_storage.py Firefox abcd1234.default > var/lib/raw/onetab_firefox_abc_personal.json
     ```
