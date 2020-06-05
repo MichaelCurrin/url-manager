@@ -13,7 +13,12 @@ https://anothersite.com | Another title in a new section but with no section hea
 
 However, the result is not in a JSON structure and also omits metadata like custom titles and times. Therefore this project's own data export process is preferred.
 
-Update: The data storage formats change, there are binary characters to handle and special characters can break the parsing, so you're better off parsing the saved HTML page using Node or Python, or using the plain text output if the headings aren't important.
+
+## Update
+
+The data storage formats change, there are binary characters to handle and special characters can break the parsing, so you're better off parsing the saved HTML page using Node or Python, or using the plain text output if the headings aren't important.
+
+Focusing on the frontend is also much easier to reproduce across Chrome and Firefox with one script.
 
 
 ## Firefox
