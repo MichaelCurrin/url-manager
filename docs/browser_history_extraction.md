@@ -3,7 +3,7 @@
 
 ## Chrome
 
-How to get your history out of the History file. Based on [guide](http://giantdorks.org/alain/export-chrome-or-chromium-browsing-history-on-linux/#:~:text=To%20export%20Chrome%20(or%20Chromium,the%20user%2Ddata%2Ddir.).
+How to get your history out of the History file. Based on [guide](http://giantdorks.org/alain/export-chrome-or-chromium-browsing-history-on-linux/).
 
 _Note that it's easier to sync to Google after signing into the browser and then download the history across all machines. But if you need history specfic to a machine or are not signed into Chrome, this will work. For visualizing data from a downloaded file, see [History report](https://github.com/MichaelCurrin/history-report)._
 
