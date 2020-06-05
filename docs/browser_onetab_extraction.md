@@ -13,6 +13,8 @@ https://anothersite.com | Another title in a new section but with no section hea
 
 However, the result is not in a JSON structure and also omits metadata like custom titles and times. Therefore this project's own data export process is preferred.
 
+Update: The data storage formats change, there are binary characters to handle and special characters can break the parsing, so you're better off parsing the saved HTML page using Node or Python, or using the plain text output if the headings aren't important.
+
 
 ## Firefox
 
@@ -22,7 +24,7 @@ The approach below parses the `storage.json` and gets the value of 'state' field
 
 - **Update**
     - Sometime at the end of 2019 there was an update to the extension means this is no longer true - you'll find storage.json.migrated with an old date but I don't know where the new storage location is.
-    - Look into LevelDB - `~/.mozilla/firefox/ID.default/storage/permanent/indexeddb+++extension-at-one-tab-dot-com/idb`
+    - Looked into LevelDB but it's mostly empty - `~/.mozilla/firefox/ID.default/storage/permanent/indexeddb+++extension-at-one-tab-dot-com/idb`
 
 1. Open Firefox.
 2. Go to the `about:profiles` page. This will show you your Firefox users.
