@@ -54,7 +54,7 @@ The approach below reads the OneTab extension data from Chrome's **LevelDB** sto
 3. Follow the commands below to enter the browser and username and save the output. An example is shown below.
     ```bash
     $ # Use the full path to the raw directory and then provide a suitable name for the file.
-    $ OUTPUT='var/lib/raw/onetab_chrome_abc_personal.json'
+    $ OUT='var/lib/raw/onetab_chrome_abc_personal.json'
     
     $ # Set your desired browser and display name as arguments. For example:
     $ ./extract_onetab_storage.py Chrome 'Profile 1' > "$OUT"
