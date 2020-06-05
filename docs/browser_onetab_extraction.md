@@ -20,7 +20,9 @@ Find the location of OneTab data for your Firefox user accounts and make it avai
 
 The approach below parses the `storage.json` and gets the value of 'state' field inside it.
 
-**Update: Sometime at the end of 2019 there was an update to the extension means this is no longer true - you'll find storage.json.migrated with an old date but I don't know where the new storage location is.**
+- **Update**
+    - Sometime at the end of 2019 there was an update to the extension means this is no longer true - you'll find storage.json.migrated with an old date but I don't know where the new storage location is.
+    - Look into LevelDB - `~/.mozilla/firefox/ID.default/storage/permanent/indexeddb+++extension-at-one-tab-dot-com/idb`
 
 1. Open Firefox.
 2. Go to the `about:profiles` page. This will show you your Firefox users.
@@ -45,7 +47,7 @@ This section is applicable for both Chrome and Chromium browsers. The two may bo
 
 Find the location of OneTab data for your Chrome or Chromium user accounts and make it available in the project.
 
-The approach below reads the OneTab extension data from Chrome's LevelDB storage then gets the value of 'state' field within it.
+The approach below reads the OneTab extension data from Chrome's **LevelDB** storage then gets the value of 'state' field within it.
 
 1. Get a list of usernames and display names on your system as covered by the [Identify Chrome Profiles](/docs/identify_chrome_profiles.md) doc.
 2. Decide on the browser and username you want to target.
