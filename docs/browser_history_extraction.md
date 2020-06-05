@@ -8,7 +8,9 @@ How to get your history out of the History file. Based on [guide](http://giantdo
 _Note that it's easier to sync to Google after signing into the browser and then download the history across all machines. But if you need history specfic to a machine or are not signed into Chrome, this will work. For visualizing data from a downloaded file, see [History report](https://github.com/MichaelCurrin/history-report)._
 
 
-Find the history file. On Linux:
+### Find the history file
+
+On Linux:
 
 ```
 ~/.config/google-chrome/$PROFILE/History
@@ -20,8 +22,9 @@ Replace `google-chrome` with `chromium` if needed.
 
 The file is a SQLite file.
 
-If Chrome is open the file will be locked, you'll might want to copy the file and then access at.
+If Chrome is open the file will be locked, you'll might want to copy the file and then access that.
 
+### Query it
 
 ```sh
 QUERY="
@@ -39,3 +42,5 @@ QUERY="
 
 sqlite3 History -header -csv "$QUERY" > /tmp/history.json
 ```
+
+Open the JSON file.
