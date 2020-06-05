@@ -26,9 +26,10 @@ The approach below parses the `storage.json` and gets the value of 'state' field
 4. Follow the commands below to enter the browser and username and save the output. An example is shown below.
     ```bash
     $ # Use the full path to the raw directory and then provide a suitable name for the file.
-    $ OUTPUT=~/PATH/TO/REPO/url_manager/var/lib/raw/onetab_firefox_abc_personal.json
+    $ OUT='var/lib/raw/onetab_firefox_abc_personal.json'
+    
     $ # Set your username as the second argument.
-    $ ./extract_onetab_storage.py Firefox abcd1234.default > "$OUTPUT"
+    $ ./extract_onetab_storage.py Firefox abcd1234.default > "$OUT"
     ```
 5. Go back to step 3 and repeat for other profiles as desired.
 
@@ -49,9 +50,10 @@ The approach below reads the OneTab extension data from Chrome's LevelDB storage
 3. Follow the commands below to enter the browser and username and save the output. An example is shown below.
     ```bash
     $ # Use the full path to the raw directory and then provide a suitable name for the file.
-    $ OUTPUT=~/PATH/TO/REPO/url_manager/var/lib/raw/onetab_chrome_abc_personal.json
+    $ OUTPUT='var/lib/raw/onetab_chrome_abc_personal.json'
+    
     $ # Set your desired browser and display name as arguments. For example:
-    $ ./extract_onetab_storage.py Chrome 'Profile 1' > "$OUTPUT"
+    $ ./extract_onetab_storage.py Chrome 'Profile 1' > "$OUT"
     ```
 4. Go back to step 2 and repeat for other browser and profile pairs as desired.
 
