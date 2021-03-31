@@ -14,21 +14,33 @@ https://anothersite.com | Another title in a new section but with no section hea
 However, the result is not in a JSON structure and also omits metadata like custom titles and times. Therefore this project's own data export process is preferred.
 
 
+## Update
+
+The data storage formats change, there are binary characters to handle and special characters can break the parsing, so you're better off parsing the saved HTML page using Node or Python, or using the plain text output if the headings aren't important.
+
+Focusing on the frontend is also much easier to reproduce across Chrome and Firefox with one script.
+
+
 ## Firefox
 
 Find the location of OneTab data for your Firefox user accounts and make it available in the project. Note that this has only been tested for Firefox and not Firefox Quantum.
 
 The approach below parses the `storage.json` and gets the value of 'state' field inside it.
 
+- **Update**
+    - Sometime at the end of 2019 there was an update to the extension means this is no longer true - you'll find storage.json.migrated with an old date but I don't know where the new storage location is.
+    - Looked into LevelDB but it's mostly empty - `~/.mozilla/firefox/ID.default/storage/permanent/indexeddb+++extension-at-one-tab-dot-com/idb`
+
 1. Open Firefox.
-2. Go to the [about:profiles](about:profiles) page. This will show you your Firefox users.
+2. Go to the `about:profiles` page. This will show you your Firefox users.
 3. Choose the profile you want, look at the paths and copy the username from one. e.g. `abcd1234.default`
 4. Follow the commands below to enter the browser and username and save the output. An example is shown below.
     ```bash
     $ # Use the full path to the raw directory and then provide a suitable name for the file.
-    $ OUTPUT=~/PATH/TO/REPO/url_manager/var/lib/raw/onetab_firefox_abc_personal.json
+    $ OUT='var/lib/raw/onetab_firefox_abc_personal.json'
+    
     $ # Set your username as the second argument.
-    $ ./extract_onetab_storage.py Firefox abcd1234.default > $OUTPUT
+    $ ./extract_onetab_storage.py Firefox abcd1234.default > "$OUT"
     ```
 5. Go back to step 3 and repeat for other profiles as desired.
 
@@ -42,16 +54,17 @@ This section is applicable for both Chrome and Chromium browsers. The two may bo
 
 Find the location of OneTab data for your Chrome or Chromium user accounts and make it available in the project.
 
-The approach below reads the OneTab extension data from Chrome's LevelDB storage then gets the value of 'state' field within it.
+The approach below reads the OneTab extension data from Chrome's **LevelDB** storage then gets the value of 'state' field within it.
 
 1. Get a list of usernames and display names on your system as covered by the [Identify Chrome Profiles](/docs/identify_chrome_profiles.md) doc.
 2. Decide on the browser and username you want to target.
 3. Follow the commands below to enter the browser and username and save the output. An example is shown below.
     ```bash
     $ # Use the full path to the raw directory and then provide a suitable name for the file.
-    $ OUTPUT=~/PATH/TO/REPO/url_manager/var/lib/raw/onetab_chrome_abc_personal.json
+    $ OUT='var/lib/raw/onetab_chrome_abc_personal.json'
+    
     $ # Set your desired browser and display name as arguments. For example:
-    $ ./extract_onetab_storage.py Chrome 'Profile 1' > $OUTPUT
+    $ ./extract_onetab_storage.py Chrome 'Profile 1' > "$OUT"
     ```
 4. Go back to step 2 and repeat for other browser and profile pairs as desired.
 
