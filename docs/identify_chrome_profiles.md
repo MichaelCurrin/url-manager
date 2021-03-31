@@ -12,7 +12,7 @@ Below are two approaches to identify all pairs names and paths for your Chrome-l
 
 ### The automated way
 
-This uses the [Identify Chrome Profiles](/tools/identify_chrome_profiles.sh) tool, which is a standlone script which can be run from anywhere.
+This uses the [Identify Chrome Profiles](/tools/identify_chrome_profiles.sh) tool, which is a standalone script which can be run from anywhere.
 
 Within each browser, the directory for the profile is shown against the browser user display name.
 
