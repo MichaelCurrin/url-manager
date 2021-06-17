@@ -1,6 +1,9 @@
 # URL Manager
 > Centralize, view, edit, label and organize collections of your favorite URLs 
 
+A meta bookmark manager to rule them all.
+
+
 ## About
 
 The aim is to help you create and find your URL more efficiently and within a personalised structure. The result is a tool for you to import browser bookmark-related URL data from various sources and manage them in a single structured, easy-to-search data source.
