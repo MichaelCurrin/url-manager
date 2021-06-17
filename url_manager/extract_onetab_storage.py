@@ -65,6 +65,8 @@ def parse_leveldb_bytes(data_bytes):
 
     :return: dict of data.
     """
+    assert data_bytes is not None
+
     # Remove this very common but somehow non-functional character.
     data_bytes = data_bytes.replace(b"\x00", b"")
 
