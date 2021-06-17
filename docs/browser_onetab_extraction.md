@@ -14,6 +14,13 @@ https://anothersite.com | Another title in a new section but with no section hea
 However, the result is not in a JSON structure and also omits metadata like custom titles and times. Therefore this project's own data export process is preferred.
 
 
+## Note
+
+The data storage formats change, there are binary characters to handle and special characters can break the parsing, so you might be better off parsing the saved HTML page using Node or Python, or using the plain text output if the headings aren't important.
+
+Focusing on the frontend is also much easier to reproduce across Chrome and Firefox with one script.
+
+
 ## Firefox
 
 Find the location of OneTab data for your Firefox user accounts and make it available in the project. Note that this has only been tested for Firefox and not Firefox Quantum.
@@ -21,7 +28,7 @@ Find the location of OneTab data for your Firefox user accounts and make it avai
 The approach below parses the `storage.json` and gets the value of 'state' field inside it.
 
 1. Open Firefox.
-2. Go to the _about:profiles_ page. This will show you your Firefox users.
+2. Go to the `about:profiles` page. This will show you your Firefox users.
 3. Choose the profile you want, look at the paths and copy the username from one. e.g. `abcd1234.default`
 4. Follow the commands below to enter the browser and username and save the output. An example is shown below. Set your username as the second argument.
     ```bash
@@ -35,6 +42,7 @@ The approach below parses the `storage.json` and gets the value of 'state' field
 Resources:
 
 - [Profiles - Where Firefox stores your bookmarks, passwords and other user data](https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data)
+
 
 ## Chrome
 
@@ -54,7 +62,7 @@ The approach below reads the OneTab extension data from Chrome's LevelDB storage
     $ # Use the full path to the raw directory and then provide a suitable name for the file.
     $ OUTPUT=~/PATH/TO/REPO/url_manager/var/lib/raw/onetab_chrome_abc_personal.json
     $ # Set your desired browser and display name as arguments. For example:
-    $ ./extract_onetab_storage.py Chrome 'Profile 1' > $OUTPUT
+    $ ./extract_onetab_storage.py Chrome 'Profile 1' > "$OUTPUT"
     ```
 4. Go back to step 2 and repeat for other browser and profile pairs as desired.
 
