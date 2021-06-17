@@ -48,7 +48,6 @@ import os
 from lib import convert
 from lib.config import AppConf
 
-
 conf = AppConf()
 
 
@@ -75,22 +74,19 @@ def process_chrome_bookmarks(data):
     :return out_data: dict of transformed Chrombe book data, with structure
         as per this module's docstring.
     """
-    bookmark_data = data['roots']
+    bookmark_data = data["roots"]
 
-    bookmark_data.pop('sync_transaction_version', None)
+    bookmark_data.pop("sync_transaction_version", None)
 
     out_data = {}
 
     # The key can be ignored at this section level, since the folder's details
     # within the section provides a name and it is more readable there.
     for folder in bookmark_data.values():
-         folder_name, child_data = process_chrome_folder(folder)
-         out_data[folder_name] = child_data
+        folder_name, child_data = process_chrome_folder(folder)
+        out_data[folder_name] = child_data
 
-    return {
-        'folders': out_data,
-        'urls': []
-    }
+    return {"folders": out_data, "urls": []}
 
 
 def process_chrome_folder(folder):
@@ -126,36 +122,36 @@ def process_chrome_folder(folder):
             The time value is a stringified form of a datetime.datetime
             object. e.g. '2017-11-19 17:57'.
     """
-    assert folder['type'] == 'folder', \
-        "Expected folder but got: {}".format(folder['type'])
+    assert folder["type"] == "folder", "Expected folder but got: {}".format(
+        folder["type"]
+    )
 
-    folder_name = folder['name']
+    folder_name = folder["name"]
     folders = {}
     urls = []
 
-    for child in folder['children']:
-        if child['type'] == 'folder':
-            assert child['name'] not in folders, "Folder name '{}' already "\
-                "in current level.".format(child['name'])
+    for child in folder["children"]:
+        if child["type"] == "folder":
+            assert (
+                child["name"] not in folders
+            ), "Folder name '{}' already " "in current level.".format(child["name"])
             # Do recursive logic on the folder's subfolders.
             subfolder_name, child_data = process_chrome_folder(child)
             folders[subfolder_name] = child_data
-        elif child['type'] == 'url':
-            date_added = convert.from_chrome_epoch(child['date_added'])
+        elif child["type"] == "url":
+            date_added = convert.from_chrome_epoch(child["date_added"])
 
             url = {
-               'title': child['name'],
-               'url': child['url'],
-               'date_added': date_added.strftime(convert.DATETIME_FORMAT),
+                "title": child["name"],
+                "url": child["url"],
+                "date_added": date_added.strftime(convert.DATETIME_FORMAT),
             }
             urls.append(url)
         else:
-            raise AssertionError("Expect folder or url but got: {}"
-                                 .format(child['type']))
-    child_data = {
-        'folders': folders,
-        'urls': urls
-    }
+            raise AssertionError(
+                "Expect folder or url but got: {}".format(child["type"])
+            )
+    child_data = {"folders": folders, "urls": urls}
 
     return folder_name, child_data
 
@@ -200,15 +196,15 @@ def transform_onetab(data):
     :return out_data: dict of transformed Onetab data, with structure
         as per this module's docstring.
     """
-    groups = data['tabGroups']
+    groups = data["tabGroups"]
 
     out_data = {}
 
     for group in groups:
-        group_time = group['createDate']
+        group_time = group["createDate"]
         date_added = convert.from_onetab_epoch(group_time)
 
-        folder_name = group.get('label', None)
+        folder_name = group.get("label", None)
         if folder_name is None:
             folder_name = "onetab_group_{}".format(int(date_added.timestamp()))
         else:
@@ -216,21 +212,16 @@ def transform_onetab(data):
 
         tabs = [
             {
-                'title': tab['title'],
-                'url': tab['url'],
-                'date_added': date_added.strftime(convert.DATETIME_FORMAT)
-            } for tab in group['tabsMeta']
+                "title": tab["title"],
+                "url": tab["url"],
+                "date_added": date_added.strftime(convert.DATETIME_FORMAT),
+            }
+            for tab in group["tabsMeta"]
         ]
 
-        out_data[folder_name] = {
-            'folders': {},
-            'urls': tabs
-        }
+        out_data[folder_name] = {"folders": {}, "urls": tabs}
 
-    return {
-        'folders': out_data,
-        'urls': []
-    }
+    return {"folders": out_data, "urls": []}
 
 
 def transform_file(in_path):
@@ -249,40 +240,35 @@ def transform_file(in_path):
     try:
         area, browser, location, purpose = description.split("_")
     except ValueError:
-        raise ValueError("Could not get metadata from filename: {}"
-                         .format(filename))
+        raise ValueError("Could not get metadata from filename: {}".format(filename))
 
     print("Reading: {}".format(in_path))
     with open(in_path) as f_in:
         data = json.load(f_in)
 
-    if area == 'bookmarks':
-        if browser in ['chrome', 'chromium']:
+    if area == "bookmarks":
+        if browser in ["chrome", "chromium"]:
             transformed_data = process_chrome_bookmarks(data)
         else:
-            raise ValueError("Bookmark conversion not supported for browser:"
-                             " {}".format(browser))
-    elif area == 'onetab':
+            raise ValueError(
+                "Bookmark conversion not supported for browser:" " {}".format(browser)
+            )
+    elif area == "onetab":
         # The data format should be the same for all browsers.
         transformed_data = transform_onetab(data)
 
-    processed_dir = conf.get('text_files', 'processed_dir')
+    processed_dir = conf.get("text_files", "processed_dir")
     out_path = os.path.join(processed_dir, filename)
     print("Writing: {}".format(out_path))
-    with open(out_path, 'w') as f_out:
-        json.dump(
-            transformed_data,
-            f_out,
-            indent=4,
-            sort_keys=True
-        )
+    with open(out_path, "w") as f_out:
+        json.dump(transformed_data, f_out, indent=4, sort_keys=True)
 
 
 def convert_and_write():
     """
     Convert available bookmark and OneTab data and write out files.
     """
-    raw_dir = conf.get('text_files', 'raw_dir')
+    raw_dir = conf.get("text_files", "raw_dir")
     file_paths = glob.glob("{}/*.json".format(raw_dir))
 
     for in_path in file_paths:
@@ -296,5 +282,5 @@ def main():
     convert_and_write()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
