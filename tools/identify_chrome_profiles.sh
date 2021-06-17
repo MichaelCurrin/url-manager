@@ -22,25 +22,21 @@ else
   CHROMIUM_PATH="$HOME/.config/chromium"
 fi
 
-for BROWSER_PATH in "$CHROME_PATH" "$CHROMIUM_PATH"
-do
+for BROWSER_PATH in "$CHROME_PATH" "$CHROMIUM_PATH"; do
   echo -e $(basename "$BROWSER_PATH")
 
-  if [ -d "$BROWSER_PATH" ]
-    then
-      for USERNAME in 'Default' 'Profile 1' 'Profile 2' 'Profile 3' \
-        'Profile 4' 'Profile 5' 'Profile 6' 'Profile 7' 'Profile 8' 'Profile 9'
-      do
-        USER_CONFIG="$BROWSER_PATH/$USERNAME"
-        if [ -d "$USER_CONFIG" ]
-          then
-            DISPLAY_NAME=$(python -c "$PY_CMD" < "$USER_CONFIG/Preferences")
-            echo "  $USERNAME: $DISPLAY_NAME"
-        fi
-      done
+  if [ -d "$BROWSER_PATH" ]; then
+    for USERNAME in 'Default' 'Profile 1' 'Profile 2' 'Profile 3' \
+      'Profile 4' 'Profile 5' 'Profile 6' 'Profile 7' 'Profile 8' 'Profile 9'; do
+      USER_CONFIG="$BROWSER_PATH/$USERNAME"
+      if [ -d "$USER_CONFIG" ]; then
+        DISPLAY_NAME=$(python -c "$PY_CMD" <"$USER_CONFIG/Preferences")
+        echo "  $USERNAME: $DISPLAY_NAME"
+      fi
+    done
 
-    else
-      echo "  Appears to not be installed"
-    fi
+  else
+    echo "  Appears to not be installed"
+  fi
   echo
 done
