@@ -69,6 +69,8 @@ def parse_leveldb_bytes(data_bytes):
 
     :return: dict of data.
     """
+    assert data_bytes is not None
+
     # Remove this very common but somehow non-functional character.
     data_bytes = data_bytes.replace(b"\x00", b"")
 
@@ -79,13 +81,21 @@ def parse_leveldb_bytes(data_bytes):
     # Convert double backlash to single. This handles cases like '\\"' => '\"'.
     data_str = raw_str.replace("\\\\", "\\")
 
-    # Edgecase - a title with union and intersection.
+    ###
     # Repeat 3? why doesn't it pick up later?
     # TODO TEST MORE. chrome and FF
     data_str = data_str.replace("\xe2\x88\xaa", "!!!")
     # TODO TEST MORE. chrome and FF
     data_str = data_str.replace('()")', "(∩)")
     # http://www.personal.psu.edu/ejp10/blogs/gotunicode/2007/09/inserting-the-union-and-inters-1.html
+
+    ###
+
+    # Edgecase handled by inspection on a title about union and intersection.
+
+    data_str = data_str.replace('(*")', "(&)")
+    data_str = data_str.replace('()")', "(|)")
+
     # Unescape single quote.
     data_str = data_str.replace(r"\'", r"'")
 
