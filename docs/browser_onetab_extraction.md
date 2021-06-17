@@ -27,8 +27,6 @@ The approach below parses the `storage.json` and gets the value of 'state' field
     ```bash
     $ cd url_manager
     $ source venv/bin/activate
-    # TODO: Make this part of script and config
-    # See also debug
     # FIXME. Note this no longer works due to the Firefox OneTab migration.
     $ ./extract_onetab_storage.py Firefox abcd1234.default > var/lib/raw/onetab_firefox_abc_personal.json
     ```
