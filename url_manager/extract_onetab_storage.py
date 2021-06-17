@@ -11,15 +11,14 @@ See the docs/browsers_onetab_extraction.md file for instructions.
 """
 import argparse
 import json
-import re
 import os
+import re
 import sys
 
 import plyvel
 
 from lib import BROWSER_PROFILE_DIRS
 from lib.config import AppConf
-
 
 conf = AppConf()
 
@@ -32,7 +31,9 @@ CHROME_ONETAB = "Local Storage/leveldb"
 
 # The plyvel docs recommend referencing LevelDB keys in the
 # binary form (which is how they are stored).
-LEVELDB_ONETAB_KEY = b'_chrome-extension://chphlpgkkbolifaimnlloiipkdnihall\x00\x01state'
+LEVELDB_ONETAB_KEY = (
+    b"_chrome-extension://chphlpgkkbolifaimnlloiipkdnihall\x00\x01state"
+)
 
 
 def parse_leveldb_bytes(data_bytes):
@@ -76,14 +77,14 @@ def parse_leveldb_bytes(data_bytes):
     raw_str = str(data_bytes)[2:-1]
 
     # Convert double backlash to single. This handles cases like '\\"' => '\"'.
-    data_str = raw_str.replace('\\\\', '\\')
+    data_str = raw_str.replace("\\\\", "\\")
 
     # Edgecase - a title with union and intersection.
     # Repeat 3? why doesn't it pick up later?
     # TODO TEST MORE. chrome and FF
-    data_str = data_str.replace('\xe2\x88\xaa', '!!!')
+    data_str = data_str.replace("\xe2\x88\xaa", "!!!")
     # TODO TEST MORE. chrome and FF
-    data_str = data_str.replace('()")', '(∩)')
+    data_str = data_str.replace('()")', "(∩)")
     # http://www.personal.psu.edu/ejp10/blogs/gotunicode/2007/09/inserting-the-union-and-inters-1.html
     # Unescape single quote.
     data_str = data_str.replace(r"\'", r"'")
@@ -98,7 +99,7 @@ def parse_leveldb_bytes(data_bytes):
     # so in this limited solution we replace that double quote only and not
     # the double quotes which are functional, since there is no other way for
     # now.
-    data_str = data_str.replace(' " ', ' ⍰ ')
+    data_str = data_str.replace(' " ', " ⍰ ")
 
     # Remove any characters which still look like bytes.
     data_str = re.sub(r"\\x\w\w", "⍰", data_str)
@@ -111,16 +112,18 @@ def parse_leveldb_bytes(data_bytes):
         # Run everytime?
         print(f"{type(e).__name__}: {str(e)}")
 
-        var_dir = conf.get('text_files', 'debug')
-        raw_path = os.path.join(var_dir, 'leveldb_onetab_raw.json')
-        cleaned_path = os.path.join(var_dir, 'leveldb_onetab_cleaned.json')
-        with open(raw_path, 'w') as f_out:
+        var_dir = conf.get("text_files", "debug")
+        raw_path = os.path.join(var_dir, "leveldb_onetab_raw.json")
+        cleaned_path = os.path.join(var_dir, "leveldb_onetab_cleaned.json")
+        with open(raw_path, "w") as f_out:
             f_out.writelines(raw_str)
-        with open(cleaned_path, 'w') as f_out:
+        with open(cleaned_path, "w") as f_out:
             f_out.writelines(data_str)
         print(f"Wrote raw data to: {raw_path}")
-        print(f"Wrote cleaned data containing JSON formatting error to:"
-              f" {cleaned_path}")
+        print(
+            f"Wrote cleaned data containing JSON formatting error to:"
+            f" {cleaned_path}"
+        )
 
         sys.exit(1)
 
@@ -161,9 +164,12 @@ def read_storage(browser, username):
         username.
     """
     browser_profile_dir = BROWSER_PROFILE_DIRS[browser]
-    is_chrome_like = (browser.startswith('Chrom'))
-    in_path = os.path.join(browser_profile_dir, username,
-                           CHROME_ONETAB if is_chrome_like else FIREFOX_ONETAB)
+    is_chrome_like = browser.startswith("Chrom")
+    in_path = os.path.join(
+        browser_profile_dir,
+        username,
+        CHROME_ONETAB if is_chrome_like else FIREFOX_ONETAB,
+    )
 
     if is_chrome_like:
         db = plyvel.DB(in_path)
@@ -173,7 +179,7 @@ def read_storage(browser, username):
         with open(in_path) as f_in:
             raw_data = json.load(f_in)
         # The value within the JSON is a plain string and also needs parsing.
-        data = json.loads(raw_data['state'])
+        data = json.loads(raw_data["state"])
 
     return data
 
@@ -184,14 +190,11 @@ def main():
     """
     parser = argparse.ArgumentParser("OneTab storage extractor")
 
+    parser.add_argument("BROWSER", choices=sorted(BROWSER_PROFILE_DIRS.keys()))
     parser.add_argument(
-        'BROWSER',
-        choices=sorted(BROWSER_PROFILE_DIRS.keys())
-    )
-    parser.add_argument(
-        'USERNAME',
+        "USERNAME",
         help="You browser account username. e.g. 'Default' or 'Profile 1' for"
-             " Chrome or 'abcdef.default' for Firefox. See browser_onetab_extraction.md in docs."
+        " Chrome or 'abcdef.default' for Firefox. See browser_onetab_extraction.md in docs.",
     )
 
     args = parser.parse_args()
@@ -200,5 +203,5 @@ def main():
     print(json.dumps(data, indent=4))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
