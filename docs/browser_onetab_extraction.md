@@ -35,6 +35,7 @@ The approach below parses the `storage.json` and gets the value of 'state' field
 5. Go back to step 3 and repeat for other profiles as desired.
 
 Resources:
+
 - [Profiles - Where Firefox stores your bookmarks, passwords and other user data](https://support.mozilla.org/en-US/kb/profiles-where-firefox-stores-user-data)
 
 ## Chrome
