@@ -29,7 +29,7 @@ The approach below parses the `storage.json` and gets the value of 'state' field
     $ source venv/bin/activate
     # TODO: Make this part of script and config
     # See also debug
-    # NB. This no longer works due to the Firefox OneTab migration.
+    # FIXME. Note this no longer works due to the Firefox OneTab migration.
     $ ./extract_onetab_storage.py Firefox abcd1234.default > var/lib/raw/onetab_firefox_abc_personal.json
     ```
 5. Go back to step 3 and repeat for other profiles as desired.
