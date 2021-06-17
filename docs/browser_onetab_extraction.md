@@ -87,7 +87,7 @@ This approach was initially created as a manual step which can be ignored if the
     $ # You can view the file if you want.
     $ view path/to/repo/url_manager/var/lib/raw/chrome_onetab__mycompany_personal.json
     ```
-    ```json
+    ```json5
     {
         "tabGroups": [
             {
