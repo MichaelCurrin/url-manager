@@ -1,36 +1,43 @@
 # Browser Bookmark Extraction
 
-
 Export bookmark data from web browsers and save as text files. These can then by parsed added to the database, using the URL Manager application.
+
 
 ## Chrome
 
 This section is applicable for both Chrome and Chromium web browsers. The two may both exist on the same system and both may be imported in the URL Manager application.
 
-Before continuing, follow the [Identify Chrome Profiles](identify_chrome_profiles.md) instructions.
+Before continuing, follow the [Identify Chrome Profiles](identify_chrome_profiles.md) instructions. Your user will be `Default`, or `Profile 2`, `Profile 3`, etc.
 
 ### Copy an existing JSON file
 
 Choose a user from Chrome or Chromium which you want to include in the project. In the example below, the 'Research' user from Chrome is used.
 
-Put a link to the user's Preferences file in the project. The linked file will always point to the most up to date data in the original file. Note the file naming convention of area, browser name and then profile name.
+Path to JSON file:
 
-```bash
-$ ln -s ~/.config/google-chrome/Profile\ 3/Bookmarks \
-    url_manager/var/lib/raw/bookmarks_chrome_research.json
-```
+OS    | Path
+---   | ---
+Linux | `~/.config/google-chrome/Default/Bookmarks`
+macOS | `~/Library/Application\ Support/Google/Chrome/Default/Bookmarks`
 
-Or, make a copy of the preferences data in the project. Though, this duplicated file will not be updated if the original changes so this is not recommended unless you want to experiment with editing the copy by hand.
+Navigate to the root of this repo then run one of the following.
 
-```bash
-$ cp ~/.config/google-chrome/Profile\ 3/Bookmarks \
-    url_manager/var/lib/raw/bookmarks_chrome_research.json
-```
+- Symlink
+    - Put a _symlink_ to the user's Preferences file in the project. The linked file will always point to the most up to date data in the original file. Note the file naming convention of area, browser name and then profile name.
+    ```sh
+    $ ln -s BOOKMARK_PATH \
+        url_manager/var/lib/raw/bookmarks_chrome_research.json
+    ```
+- Copy
+    Make a _copy_ of the preferences data in the project. Though, this duplicated file will not be updated if the original changes so this is not recommended unless you want to experiment with editing the copy by hand.
+    ```sh
+    $ cp BOOKMARK_PATH \
+        url_manager/var/lib/raw/bookmarks_chrome_research.json
+    ```
 
 You now have a reference to a single user's bookmarks in your project. Repeat the steps for all users which you want to import into the URL Manager application.
 
-
-Those steps above could be automated with a script, but then that will require handling OS and browser types and requiring inputs for username or display name (internally lookup username) and then a way to generate a filename or link name with some input.
+Those steps above could be automated with a script or Makefile, but then that will require handling OS and browser types and requiring inputs for username or display name (internally lookup username) and then a way to generate a filename or link name with some input.
 
 ### Export as JSON using JavaScript
 
@@ -57,9 +64,9 @@ But the file seems to follow a format of self-closing tags which is not understo
 
 This was the case when attempting to parse with these 3 methods:
 
-- Online [XML to JSON converter](http://www.utilities-online.info/xmltojson/#.WuD0KDPRY0M) failed to process
-- Python package `xmltodict`: failed to process
-- Python package `bs4` (BeautifulSoup4): file was processed, but tags were incorrectly nested too deeply due to a lack of closing tags.
+- Online [XML to JSON converter](http://www.utilities-online.info/xmltojson/#.WuD0KDPRY0M) - failed to process
+- Python package `xmltodict` - failed to process
+- Python package `bs4` (BeautifulSoup4) - file was processed, but tags were incorrectly nested too deeply due to a lack of closing tags.
 
 Therefore using neither straight XML or parsing XML to JSON is supported in this project. However, if other parsers can be used or upgrading to newer versions works, then I'll be able to use the XML export.
 
