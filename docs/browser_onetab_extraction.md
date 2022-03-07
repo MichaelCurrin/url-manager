@@ -58,7 +58,7 @@ The approach below reads the OneTab extension data from Chrome's LevelDB storage
 1. Get a list of usernames and display names on your system as covered by the [Identify Chrome Profiles](/docs/identify_chrome_profiles.md) doc.
 1. Decide on the browser and username you want to target.
 1. Follow the commands below to enter the browser and username and save the output. An example is shown below.
-    ```bash
+    ```sh
     $ # Use the full path to the raw directory and then provide a suitable name for the file.
     $ OUTPUT=~/PATH/TO/REPO/url_manager/var/lib/raw/onetab_chrome_abc_personal.json
     $ # Set your desired browser and display name as arguments. For example:
