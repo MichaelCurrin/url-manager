@@ -28,16 +28,16 @@ Find the location of OneTab data for your Firefox user accounts and make it avai
 The approach below parses the `storage.json` and gets the value of 'state' field inside it.
 
 1. Open Firefox.
-2. Go to the `about:profiles` page. This will show you your Firefox users.
-3. Choose the profile you want, look at the paths and copy the username from one. e.g. `abcd1234.default`
-4. Follow the commands below to enter the browser and username and save the output. An example is shown below. Set your username as the second argument.
+1. Go to the `about:profiles` page. This will show you your Firefox users.
+1. Choose the profile you want, look at the paths and copy the username from one. e.g. `abcd1234.default`
+1. Follow the commands below to enter the browser and username and save the output. An example is shown below. Set your username as the second argument.
     ```sh
     $ cd url_manager
     $ source venv/bin/activate
     # FIXME. Note this no longer works due to the Firefox OneTab migration.
     $ ./extract_onetab_storage.py Firefox abcd1234.default > var/lib/raw/onetab_firefox_abc_personal.json
     ```
-5. Go back to step 3 and repeat for other profiles as desired.
+1. Go back to step 3 and repeat for other profiles as desired.
 
 Resources:
 
